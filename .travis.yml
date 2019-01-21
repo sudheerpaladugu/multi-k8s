@@ -6,18 +6,16 @@ before_install:
   - docker build -t sdrpaladu/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run sdrpaladu/react-test npm test -- --coverage # -- --coverage means -> exit with coverage results
+  - docker run sdrpaladu/react-test npm test -- --coverage
 
 after_success:
   - docker build -t sdrpaladu/multi-client ./client
   - docker build -t sdrpaladu/multi-nginx ./nginx
   - docker build -t sdrpaladu/multi-server ./server
   - docker build -t sdrpaladu/multi-worker ./worker
-
-  #Login to docker cli and push these images to docker hub
-  #Login to Docker CLI
-  - echo "$DOCKER_PASSWORD"  | docker login -u "$DOCKER_ID" --password-stdin
-  #Push images off to Docker hub
+  # Log in to the docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # Take those images and push them to docker hub
   - docker push sdrpaladu/multi-client
   - docker push sdrpaladu/multi-nginx
   - docker push sdrpaladu/multi-server

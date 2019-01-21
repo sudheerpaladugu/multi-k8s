@@ -14,8 +14,7 @@ after_success:
   - docker build -t sdrpaladu/multi-server ./server
   - docker build -t sdrpaladu/multi-worker ./worker
   # Log in to the docker CLI
-  #- echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-  - docker login -u "$DOCKER_ID" -p "$DOCKER_PASSWORD"
+  - docker login -u sdrpaladu -p Pa$$w0rd
   # Take those images and push them to docker hub
   - docker push sdrpaladu/multi-client
   - docker push sdrpaladu/multi-nginx

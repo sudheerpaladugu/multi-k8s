@@ -2,6 +2,7 @@ FROM node:alpine
 WORKDIR '/app'
 COPY ./package.json ./
 RUN npm install
-
+#Added below to resolve - could not find axios error in Fib.js
+RUN npm audit fix --force
 COPY . .
 CMD ["npm", "run", "start"]
